@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Difference</title>
+
+    <!--links do react-->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <h1>Aqui abaixo vamos ver a diferença de se utilizar JavaScript puro e React</h1><br>
+    
+    <div>
+        <h3>Versão JavaScript Puro</h3><br>
+
+        <p>Total: <span id="total"></span></p>
+        <p>Preço: <span id="preco"></span></p>
+        <button id="compra">Comprar</button>
+    </div>
+    <br><br><br>
+    <!--Utilizando JavaScript Puro-->
+    <script type="application/javascript">
+        const total = document.getElementById("total");
+        const preco = document.getElementById("preco");
+        const compra = document.getElementById("compra");
+
+        let contador = 1;
+
+        function atualizarValor(contador){
+            total.innerText = contador;
+            preco.innerText = contador * 250;
+        }
+
+        atualizarValor(contador);
+
+        function handleClick(){
+            contador ++;
+            atualizarValor(contador + 1);
+        }
+
+        compra.addEventListener('click', handleClick); 
+    </script>
+
+    <!--Utilizando React-->
+    <div id="App"></div>
+
+    <script type="text/babel">
+
+        const Comprar = () => {
+            const [contador, setContador] = React.useState(1);
+
+            return (
+                <div>
+                    <h3>Versão React</h3>
+                    <p>Total: {contador}</p>
+                    <p>Preço: R$ {contador * 250}</p>
+                    <button onClick={()=> setContador(contador  + 1)}>Comprar</button>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<Comprar />, document.getElementById('App'))
+    </script>
+
+</body>
+</html>
